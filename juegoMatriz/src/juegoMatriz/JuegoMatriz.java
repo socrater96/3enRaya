@@ -9,7 +9,7 @@ public class JuegoMatriz {
 		for(int i=0;i<3;i++) {
 			for(int j=0;j<3;j++) {
 				do {
-					System.out.println("Introduzca 0/1 en columna "+i+" y fila "+j);
+					System.out.println("Introduzca 0/1 en fila "+(i+1)+" y columna "+(j+1));
 					try {
 						tablero[i][j]=in.nextInt();
 						in.nextLine();
@@ -22,44 +22,63 @@ public class JuegoMatriz {
 		}
 		return tablero;
 	}
-	static boolean fila(int [][] tablero) {
+	static void fila(int [][] tablero) {
 		boolean coincide=false;
 		for(int i=0;i<3;i++) {
-			coincide=true;
-			for(int j=0;j<2;j++) {
-				if(tablero[i][j]!=tablero[i][j+1]) {
-					coincide=false;
+			for(int j=0;j<3;j++) {
+				if(tablero[i][0]==tablero[i][j]) {
+					coincide=true;
 				}
 				else
-					coincide=true;	
+					coincide=false;
 			}
 			if(coincide) {
 				System.out.println("Hay una fila con 3 en raya");
-				return true;
-			}	
+				break;
+			}
 		}
-		return false;
 	}
-	static boolean columna(int [][] tablero) {
-		return false;
+	static void columna(int [][] tablero) {
+		boolean coincide=false;
+		for(int j=0;j<3;j++) {
+			coincide=true;
+			for(int i=0;i<3;i++) {
+				if(tablero[0][j]!=tablero[i][j]) {
+					coincide=false;
+					break;
+				}
+			}
+			if(coincide) {
+				System.out.println("Hay una columna con 3 en raya");
+				break;
+			}
+		}
 	}
-	static boolean diagonal(int [][] tablero) {
-		return false;
+	static void diagonal(int [][] tablero) {
+		boolean coincide=false;
+		for(int i=0;i<3;i++) {
+			if(tablero[0][0]==tablero[i][i]) {
+				coincide=true;
+			}
+			else
+				coincide=false;
+		}
+		if(coincide) {
+			System.out.println("Hay una diagonal con 3 en raya");
+		}
+			
 	}
-	
 	public static void main(String [] args) {
 		Scanner in = new Scanner(System.in);
 		int[][] tablero = new int[3][3];
-		boolean hay=false;
 		tablero=llenadoTablero(in);
 		visualizarTablero(tablero);
-		hay=fila(tablero);
-		hay=columna(tablero);
-		hay=diagonal(tablero);
+		fila(tablero);
+		columna(tablero);
+		diagonal(tablero);
 		
 	}
 	static void visualizarTablero(int[][] tablero) {
-		// TODO Auto-generated method stub
 		for(int i=0;i<3;i++) {
 			for(int j=0;j<3;j++) {
 				System.out.print(tablero[i][j]+"\t");
