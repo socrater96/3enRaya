@@ -25,12 +25,11 @@ public class JuegoMatriz {
 	static void fila(int [][] tablero) {
 		boolean coincide=false;
 		for(int i=0;i<3;i++) {
+			coincide=true;
 			for(int j=0;j<3;j++) {
-				if(tablero[i][0]==tablero[i][j]) {
-					coincide=true;
-				}
-				else
+				if(tablero[i][0]!=tablero[i][j]) {
 					coincide=false;
+				}
 			}
 			if(coincide) {
 				System.out.println("Hay una fila con 3 en raya");
@@ -66,17 +65,15 @@ public class JuegoMatriz {
 		if(coincide) {
 			System.out.println("Hay una diagonal con 3 en raya");
 		}
+		else {
+			for (int i = 1; i < 3; i++) {
+	            if (tablero[i][2 - i] != tablero[0][2]) {
+	                coincide = false;
+	                break;
+	            }
+			}
+		}
 			
-	}
-	public static void main(String [] args) {
-		Scanner in = new Scanner(System.in);
-		int[][] tablero = new int[3][3];
-		tablero=llenadoTablero(in);
-		visualizarTablero(tablero);
-		fila(tablero);
-		columna(tablero);
-		diagonal(tablero);
-		
 	}
 	static void visualizarTablero(int[][] tablero) {
 		for(int i=0;i<3;i++) {
@@ -86,4 +83,14 @@ public class JuegoMatriz {
 		System.out.println("");
 		}
 	}
+	public static void main(String [] args) {
+		Scanner in = new Scanner(System.in);
+		int[][] tablero = new int[3][3];
+		tablero=llenadoTablero(in);
+		visualizarTablero(tablero);
+		fila(tablero);
+		columna(tablero);
+		diagonal(tablero);	
+	}
+	
 }
